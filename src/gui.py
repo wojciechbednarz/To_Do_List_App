@@ -1,6 +1,7 @@
 import logging
 import os
 from PySide6 import QtCore, QtWidgets, QtGui
+from src.app import add_task_from_gui
 
 
 class ToDoGui(QtWidgets.QMainWindow):
@@ -126,6 +127,7 @@ class ToDoGui(QtWidgets.QMainWindow):
             item = QtWidgets.QListWidgetItem(text)
             self.items_to_do.addItem(item)
             self.text_input.clear()
+            add_task_from_gui(text)
             self.prioritize_tasks(item)
         else:
             self.show_warning_message("Please enter item to do!")
@@ -141,6 +143,7 @@ class ToDoGui(QtWidgets.QMainWindow):
                     for line in txt_file:
                         item = QtWidgets.QListWidgetItem(line.strip())
                         self.items_to_do.addItem(item)
+                        add_task_from_gui(line.strip())
                         self.text_input.clear()
                         self.prioritize_tasks(item)
             else:
